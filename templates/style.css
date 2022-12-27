@@ -1,0 +1,21 @@
+	    body {
+                font-family: Arial, sans-serif;
+		background-color: #1f1e1c;
+            }
+            .title {
+                text-align: center;
+                font-size: 32px;
+                font-weight: bold;
+                margin: 20px 0;
+            }
+            .image {
+                width: 100px;
+   		height: auto;
+    		border: 1px solid #ccc;
+    		border-radius: 5px;
+            }
+            img {
+ 		width: 80%;
+  		height: auto;
+   		border: 1px solid #ccc;
+   	 	border-radius: 5px;   

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Live Streaming</title>
+        <link rel="stylesheet" type="text/css" href="./style.css">
+    </head>
+    <body>
+        <div class="top-bar">
+            <ul>
+                <li><a href="#" class="logo">My Video Stream</a></li>
+            </ul>
+        </div>
+        <div class="image">
+            <img src="{{ url_for('video_feed') }}" >
+        </div>
+    </body>
+</html>
