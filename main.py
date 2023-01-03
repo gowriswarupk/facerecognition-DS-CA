@@ -9,6 +9,8 @@ import time
 import functools
 import base64
 import uuid
+import threading
+import waitress
 
 hostname=socket.gethostname() 
 IPAddr=socket.gethostbyname(hostname) #Get Ip address
@@ -52,7 +54,7 @@ capture = cv2.VideoCapture(0)
 global videoFrame, img
 
 @functools.lru_cache(maxsize=None)
-def recognise_faces():
+def recognize_faces():
 
      # Other required initializatons
     frame_count = 0
@@ -101,6 +103,10 @@ def recognise_faces():
 
         ret, buffer = cv2.imencode('.jpg', img)  # convert to jpg format for browser
 
+        # Start the face detection and recognition thread
+        thread = threading.Thread(target= recognize_faces)
+        thread.start()
+
         #FPS COUNTER + Display on IMG Output
         # Calculate FPS
         elapsed_time = time.time() - start_time
@@ -141,7 +147,7 @@ def save_screenshot(data):
 # Define a route for the index page
 @recogApp.route('/face_recognition_stream')
 def face_recognition_stream():
-    return Response(recognise_faces(), mimetype='multipart/x-mixed-replace; boundary=frame')
+    return Response(recognize_faces(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 @recogApp.route('/')
 def index():
