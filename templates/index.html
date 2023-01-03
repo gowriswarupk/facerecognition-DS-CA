@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Live Streaming</title>
+        <style>
+            body {
+                display: flex;
+                flex-direction: column;
+                background-color: lightgray;
+                justify-content: center;
+                align-items: center;
+            }
+            .image img {
+              border: 5px solid blue;
+              display: flex;
+              justify-content: center;
+            }
+            .top-bar .logo {
+                text-align: center;
+            }
+          </style>
+          
+    </head>
+    <body>
+        <div class="top-bar">
+            <a href="#" class="logo">DS Demo Face Recognition LiveStream</a>
+        </div>
+        <div class="image">
+            <img src="{{ url_for('face_recognition_stream') }}" >
+        </div>
+        <div>
+            <!-- Add a text field and a button to save screenshot as image -->
+            <input type="text" id="image-name" placeholder="Enter image name">
+            <button id="save-screenshot-button">Save Screenshot</button>
+        </div>
+        <script>
+            // Bind click event handler to the button
+            document.getElementById("save-screenshot-button").addEventListener("click", function() {
+              // Get the image name from the text field
+              var imageName = document.getElementById("image-name").value;
+          
+              // Call the function to save the screenshot as an image with the specified name
+              saveScreenshot(imageName, img);
+            });
+          
+            // Function to save the screenshot as an image
+            function saveScreenshot(imageName, img) {
+            // Send message to server to trigger the function to save the screenshot as an image with the specified name
+            socket.emit("save-screenshot", {name: imageName, image: img});
+            }
+        </script>
+    </body>
+</html>
